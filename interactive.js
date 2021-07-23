@@ -179,7 +179,6 @@ function update() {
   } else {
     speed = NORMAL_SPEED
   }
-  console.log(pointer.x, viewWidth / 2)
   if (scene.cursors.right.isDown || legalPointerMove && pointer.x > mainCam.centerX) {
     moveBySpeed(player, 1)
     player.flipX = false
