@@ -4,6 +4,7 @@ let sceneScale = viewHeight / 192
 
 const FAST_SPEED = 2.75 * sceneScale
 const NORMAL_SPEED = 1.35 * sceneScale
+const IS_MOBILE = /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 let PLAYER_HEIGHT = viewHeight / 3
 let playerScale = PLAYER_HEIGHT / 32
@@ -12,7 +13,9 @@ let sceneWidth = 10000 * sceneScale
 const cloudCount = 200
 
 let scene
+let mainCam
 let spaceKey
+let pointer
 let graphics
 let bgGroup
 let player
@@ -91,32 +94,12 @@ const config = {
 
 const game = new Phaser.Game(config)
 
-
-// window.addEventListener("resize", () => {
-//   const canvas = document.querySelector("canvas")
-
-//   viewWidth = window.innerWidth
-//   viewHeight = window.innerHeight
-//   sceneScale = viewHeight / 192
-//   const windowRatio = viewWidth / viewHeight
-//   const gameRatio = game.config.width / game.config.height
-//   PLAYER_HEIGHT = viewHeight / 3
-//   playerScale = PLAYER_HEIGHT / 32
-//   sceneWidth = 10000 * sceneScale
-
-//   if (windowRatio < gameRatio) {
-//     canvas.style.width = viewWidth + "px"
-//     canvas.style.height = viewWidth / gameRatio + "px"
-//   } else {
-//     canvas.style.width = viewHeight * gameRatio + "px"
-//     canvas.style.height = viewHeight + "px"
-//   }
-// })
-
 function preload() {
   scene = game.scene.scenes[0]
+  mainCam  = scene.cameras.main
   graphics = scene.make.graphics()
   spaceKey = scene.input.keyboard.addKey('Space')
+  pointer = scene.input.activePointer
 
   scene.load.setBaseURL("")
 
@@ -189,23 +172,26 @@ function preload() {
 }
 
 function update() {
+  const legalPointerMove = pointer.primaryDown && pointer.x > 0 && pointer.x < mainCam.width && pointer.y > 0 && pointer.y < mainCam.height  && IS_MOBILE
+
   if (spaceKey.isDown) {
     speed = FAST_SPEED
   } else {
     speed = NORMAL_SPEED
   }
-  if (scene.cursors.right.isDown) {
+  console.log(pointer.x, viewWidth / 2)
+  if (scene.cursors.right.isDown || legalPointerMove && pointer.x > mainCam.centerX) {
     moveBySpeed(player, 1)
     player.flipX = false
   }
 
-  if (scene.cursors.left.isDown) {
+  if (scene.cursors.left.isDown || legalPointerMove && pointer.x < mainCam.centerX) {
     moveBySpeed(player, -1)
     player.flipX = true
   }
   if (
     (scene.cursors.right.isDown && scene.cursors.left.isDown) ||
-    (!scene.cursors.right.isDown && !scene.cursors.left.isDown)
+    (!scene.cursors.right.isDown && !scene.cursors.left.isDown && !legalPointerMove)
   ) {
     player.play("idle", true)
     player.flipX = false
@@ -228,7 +214,6 @@ function update() {
   handleCloudOffscreen(cloudGroup.children.entries)
 
   largeSignGroup.children.entries.forEach((sign) => {
-    console.log(sign)
     if (sign.overlapTime && sign.overlapTime < overlapTracker -25) {
       sign.visible = false
     }
@@ -320,8 +305,8 @@ function create() {
 
   scene.footstep = scene.sound.add("footstep")
 
-  scene.cameras.main.setBounds(0, 0, sceneWidth, viewHeight)
-  scene.cameras.main.startFollow(player)
+  mainCam.setBounds(0, 0, sceneWidth, viewHeight)
+  mainCam.startFollow(player)
 }
 
 const getScaledHeight = (texture) => {
@@ -497,7 +482,7 @@ const createCameronHead = () => {
 }
 
 const createClearSkiesSign = () => {
-  scene.cameras.main.once("camerafadeincomplete", function (camera) {
+  mainCam.once("camerafadeincomplete", function (camera) {
       camera.fadeEffect.alpha = 0.25
   })
   const height = getScaledHeight("clear-skies-sign")
@@ -507,8 +492,8 @@ const createClearSkiesSign = () => {
     clearSkiesSign,
     (player, clearSkiesSign) => {
       if (player.x > clearSkiesSign.x && !nightTime) {
-        scene.cameras.main.fadeOut(1500)
-        scene.cameras.main.once("camerafadeoutcomplete", function (camera) {
+        mainCam.fadeOut(1500)
+        mainCam.once("camerafadeoutcomplete", function (camera) {
           camera.fadeIn(1500)
           if(!nightTime){
             cloudGroup.getChildren().forEach((child) => {
@@ -522,8 +507,8 @@ const createClearSkiesSign = () => {
             nightTime = true
           }
         })
-      } else if(!scene.cameras.main.fadeEffect.isComplete) {
-        scene.cameras.main.resetFX()
+      } else if(!mainCam.fadeEffect.isComplete) {
+        mainCam.resetFX()
       }
     }
   )
