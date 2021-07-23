@@ -1,5 +1,5 @@
-let viewWidth = window.innerWidth
-let viewHeight = window.innerHeight
+let viewWidth = document.getElementById("phaser-instance").clientWidth;
+let viewHeight = document.getElementById("phaser-instance").clientHeight;
 let sceneScale = viewHeight / 192
 
 const FAST_SPEED = 2.75 * sceneScale
@@ -92,26 +92,26 @@ const config = {
 const game = new Phaser.Game(config)
 
 
-window.addEventListener("resize", () => {
-  const canvas = document.querySelector("canvas")
+// window.addEventListener("resize", () => {
+//   const canvas = document.querySelector("canvas")
 
-  viewWidth = window.innerWidth
-  viewHeight = window.innerHeight
-  sceneScale = viewHeight / 192
-  const windowRatio = viewWidth / viewHeight
-  const gameRatio = game.config.width / game.config.height
-  PLAYER_HEIGHT = viewHeight / 3
-  playerScale = PLAYER_HEIGHT / 32
-  sceneWidth = 10000 * sceneScale
+//   viewWidth = window.innerWidth
+//   viewHeight = window.innerHeight
+//   sceneScale = viewHeight / 192
+//   const windowRatio = viewWidth / viewHeight
+//   const gameRatio = game.config.width / game.config.height
+//   PLAYER_HEIGHT = viewHeight / 3
+//   playerScale = PLAYER_HEIGHT / 32
+//   sceneWidth = 10000 * sceneScale
 
-  if (windowRatio < gameRatio) {
-    canvas.style.width = viewWidth + "px"
-    canvas.style.height = viewWidth / gameRatio + "px"
-  } else {
-    canvas.style.width = viewHeight * gameRatio + "px"
-    canvas.style.height = viewHeight + "px"
-  }
-})
+//   if (windowRatio < gameRatio) {
+//     canvas.style.width = viewWidth + "px"
+//     canvas.style.height = viewWidth / gameRatio + "px"
+//   } else {
+//     canvas.style.width = viewHeight * gameRatio + "px"
+//     canvas.style.height = viewHeight + "px"
+//   }
+// })
 
 function preload() {
   scene = game.scene.scenes[0]
@@ -228,7 +228,8 @@ function update() {
   handleCloudOffscreen(cloudGroup.children.entries)
 
   largeSignGroup.children.entries.forEach((sign) => {
-    if (sign.overlapTime && sign.overlapTime < overlapTracker) {
+    console.log(sign)
+    if (sign.overlapTime && sign.overlapTime < overlapTracker -25) {
       sign.visible = false
     }
   })
@@ -239,7 +240,7 @@ function update() {
     if (child.circlePos > 1) child.circlePos = 0
     techCircle.getPoint(child.circlePos, child)
   }
-  // freelancer.play('freelance-type', true)
+  freelancer.play('freelance-type', true)
   linkedInPortal.play('portal-spin', true)
 }
 

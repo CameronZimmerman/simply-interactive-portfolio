@@ -46,7 +46,7 @@ body {
   align-items: center;
 }
 
-canvas {
+#phaser-instance {
   width: 90vw;
   height: 45vw;
 }
