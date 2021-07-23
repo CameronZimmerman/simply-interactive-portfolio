@@ -1,35 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="./media/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link href="./app.css" rel="stylesheet">
-    <title>Cameron Zimmerman</title>
-  </head>
-  <body class="center-column">
-    <div id="root" class="center-column">
-      <h1 className="name-heading">
-        🌳CAMERON ZIMMERMAN🌳
-      </h1>
-      <div className="main-content">
-        <section className="interactive-portfolio-container center" id="interactive">
-          <iframe src="interactive.html" title="Interactive Portfolio">
-          </iframe>
-        </section>
-      </div>
-      <footer>
-        <h3 style="text-align: center;">
-          Controls:
-          <br/>
-          Arrow Keys for movement
-          <br/>
-          Hold Shift for speed boost
-          <br/>
-          click to enable sound
-        </h3>
-      </footer>
-    </div>
-  </body>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body style="margin: 0px; cursor: none; overflow: hidden" id="body">
+  <script src="interactive.js"></script>
+</body>
 </html>
