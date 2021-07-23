@@ -70,6 +70,7 @@ const signObjectsArray = [
 ]
 
 const config = {
+  parent: "phaser-instance",
   type: Phaser.CANVAS,
   width: viewWidth,
   height: viewHeight,

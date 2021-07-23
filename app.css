@@ -46,8 +46,7 @@ body {
   align-items: center;
 }
 
-iframe {
+canvas {
   width: 90vw;
   height: 45vw;
-  margin: 0px;
 }
