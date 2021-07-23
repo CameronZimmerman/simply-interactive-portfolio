@@ -15,7 +15,6 @@ const cloudCount = 200
 let scene
 let mainCam
 let spaceKey
-let pointer
 let graphics
 let bgGroup
 let player
@@ -99,7 +98,6 @@ function preload() {
   mainCam  = scene.cameras.main
   graphics = scene.make.graphics()
   spaceKey = scene.input.keyboard.addKey('Space')
-  pointer = scene.input.activePointer
 
   scene.load.setBaseURL("")
 
@@ -172,19 +170,19 @@ function preload() {
 }
 
 function update() {
-  const legalPointerMove = pointer.primaryDown && pointer.x > 0 && pointer.x < mainCam.width && pointer.y > 0 && pointer.y < mainCam.height  && IS_MOBILE
+  const legalPointerMove = scene.input.activePointer.isDown && scene.input.activePointer.x > 0 && scene.input.activePointer.x < mainCam.width && scene.input.activePointer.y > 0 && scene.input.activePointer.y < mainCam.height  && IS_MOBILE
 
   if (spaceKey.isDown) {
     speed = FAST_SPEED
   } else {
     speed = NORMAL_SPEED
   }
-  if (scene.cursors.right.isDown || legalPointerMove && pointer.x > mainCam.centerX) {
+  if (scene.cursors.right.isDown || legalPointerMove && scene.input.activePointer.x > mainCam.centerX) {
     moveBySpeed(player, 1)
     player.flipX = false
   }
 
-  if (scene.cursors.left.isDown || legalPointerMove && pointer.x < mainCam.centerX) {
+  if (scene.cursors.left.isDown || legalPointerMove && scene.input.activePointer.x < mainCam.centerX) {
     moveBySpeed(player, -1)
     player.flipX = true
   }
