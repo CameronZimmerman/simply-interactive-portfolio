@@ -49,7 +49,7 @@ const signObjectsArray = [
     signText: "TechStack =>",
     bigText:
       "Through constant learning, Cameron has been able to gain experience in a variety of tools for Software Engineering",
-    xPos: 1050,
+    xPos: 900,
   },
   {
     signText: "Current Employment =>",
