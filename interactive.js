@@ -36,13 +36,13 @@ const signObjectsArray = [
   {
     signText: "Welcome",
     bigText:
-      "Thank you for taking the time to visit my portfolio.\n\r Maybe you're a fellow developer, recruiter, teacher, or hiring manager; regardless, it is my intention to open a dialogue and generate discussion. I'm inclined to not only show you what I have done, but learn and iterate based off of feedback. This portfolio is still under construction!",
+      "Thank you visiting.\n\r Maybe you're a fellow developer, recruiter, teacher, or hiring manager; regardless, it is my intention to open a dialogue and generate discussion. ",
     xPos: 350,
   },
   {
     signText: "About Cameron",
     bigText:
-      "Cameron is an energetic and positive force for your next team. He loves the human and explorative aspects of programming, and would classify himself as an intuitive learner; He is failing and iterating always. It is his mission to bring the human and technological aspects of coding together.\n\r everyone has the ability to make or break someone's day, so cameron opts to bring his best self day in and day out. You can find Cameron hiking, climbing or doing Parkour in his freetime.",
+      "Cameron is an energetic and positive force for your next team. He loves the human and explorative aspects of programming, and would classify himself as an intuitive learner. He brings his best self each day",
     xPos: 700,
   },
   {
@@ -66,7 +66,7 @@ const signObjectsArray = [
   {
     signText: "Thank you",
     bigText:
-      "Thank you for taking a walk in my world. I'm excited to get to know more about you and what opportunities we can create together. The best place to contact me is through my LinkedIn profile! Keep walking forward to see it. This interactive portfolio is a constant work in progress, and I'm always excited to add more. Tell me about any ideas you have!",
+      "Thank you for taking a walk in my world. I'm excited to get to know more about you and what opportunities we can create together. The best place to contact me is through my LinkedIn profile!",
     xPos: 4200,
   },
 ]
