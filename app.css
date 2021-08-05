@@ -51,3 +51,31 @@ body {
   width: 90vw;
   height: 45vw;
 }
+footer {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+footer h3 {
+  font-size: larger;
+}
+footer p, footer li {
+  font-size: medium;
+}
+
+.links {
+  width: 30%;
+}
+.controls {
+  width: 30%;
+}
+.techstack {
+  width: 30%;
+}
+
+.links a {
+  font-size: medium;
+  text-decoration: none;
+
+}
